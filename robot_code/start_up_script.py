@@ -44,21 +44,21 @@ class robot_car:
         self.distance_publisher.publish(data)
 
     def ultra_sonic_pulse(self):
-        gpio.output(robo_car.ultrasonic.sonar.trig, False)
+        gpio.output(self.ultrasonic.sonar.trig, False)
         time.sleep(0.1)
-        gpio.output(robo_car.ultrasonic.sonar.trig, True)
+        gpio.output(self.ultrasonic.sonar.trig, True)
         time.sleep(0.00001)
-        gpio.output(robo_car.ultrasonic.sonar.trig, False)
-        while gpio.input(robo_car.ultrasonic.sonar.echo) == 0:
+        gpio.output(self.ultrasonic.sonar.trig, False)
+        while gpio.input(self.ultrasonic.sonar.echo) == 0:
             pulse_start = time.time()
-        while gpio.input(robo_car.ultrasonic.sonar.echo) == 1:
+        while gpio.input(self.ultrasonic.sonar.echo) == 1:
             pulse_end = time.time()
         self.pulse_duration = pulse_end - pulse_start
         self.distance = self.pulse_duration * 17000
 
 
 # sample that runs ROS
-robo_car = robot_car
+robo_car = robot_car()
 
 print('-----------------------------------------------------------------sonar')
 try:
@@ -75,6 +75,7 @@ try:
         print ('Distance : %f cm'%robo_car.distance)
 
         ## sample code to make sure stuff still works
+        # motor updates will occur as function call is made
 
         print("this is a motor driver test code")
         Motor = robo_car.motors.MotorDriver()
@@ -114,9 +115,8 @@ try:
         # print()
 
         # moving sensor data to topic
-        robo_car.ultrasonic.sensor.dist_sendor(distance)
+        robo_car.ultrasonic.dist_sendor(robo_car.distance)
         robo_car.imu_sendor(robo_car.imu.sensor.euler)
-
 
         robo_car.ultrasonic.sensor.r.sleep()
 
