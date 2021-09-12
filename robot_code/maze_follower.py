@@ -19,6 +19,10 @@ class DemoRobot:
         self.pitch = 0
         self.theta = 0
 
+        #
+        self.distance = 0
+        self.status = 'forward'
+
         # defines robot parts
         self.motors = motors.MotorDriver
         self.imu = imu.IMU
@@ -48,10 +52,15 @@ class DemoRobot:
         self.theta = yaw
 
     def sonar_info(self, data):
-        distance = data
+        self.distance = data
+        if (self.distance >= 4.0):
+            self.isAvoiding = True
+        else:
+            self.isAvoiding = False
+
 
     def motor_status(self, data):
-        status = data
+        self.status = data
 
     ## Make abilities more easy to comprehend (more straightforward)
     def moveRight(self):
