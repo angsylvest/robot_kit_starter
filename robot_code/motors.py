@@ -5,7 +5,7 @@
 from PCA9685 import PCA9685
 import time
 import rospy
-from std_msgs.msg import Float32
+from std_msgs.msg import Float32, String
 
 class MotorDriver():
     def __init__(self):
@@ -27,7 +27,7 @@ class MotorDriver():
 
         # sets up ros node to send status messages
         # rospy.init_node('motors', anonymous=True)
-        self.motor_publisher = rospy.Publisher('/motor_status', Float32, queue_size=1)
+        self.motor_publisher = rospy.Publisher('/motor_status', String, queue_size=1)
 
     def MotorRun(self, motor, index, speed):
         if speed > 100:

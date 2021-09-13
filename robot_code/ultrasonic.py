@@ -23,7 +23,7 @@ class sonar:
         gpio.setup(self.echo, gpio.IN)
 
         # rospy.init_node('sonar', anonymous=True)
-        self.distance_publisher = rospy.Publisher('/sonar_dist', Float32, queue_size = 1)
+        self.distance_publisher = rospy.Publisher('/sonar_dist', String, queue_size = 1)
         # self.r = rospy.Rate(15)
 
     def dist_sendor(self, dist):
