@@ -22,10 +22,10 @@ class IMU:
         last_val = result
         return result
 
-# example_imu = IMU()
+example_imu = IMU()
 
 # script to run to test
-# while True:
+while True:
 #     print("Temperature: {} degrees C".format(example_imu.sensor.temperature))
 #     """
 #     print(
@@ -36,11 +36,11 @@ class IMU:
 #     print("Accelerometer (m/s^2): {}".format(example_imu.sensor.acceleration))
 #     print("Magnetometer (microteslas): {}".format(example_imu.sensor.magnetic))
 #     print("Gyroscope (rad/sec): {}".format(example_imu.sensor.gyro))
-#     print("Euler angle: {}".format(example_imu.sensor.euler))
+    print("Euler angle: {}".format(example_imu.sensor.euler))
 #     print("Quaternion: {}".format(example_imu.sensor.quaternion))
 #     print("Linear acceleration (m/s^2): {}".format(example_imu.sensor.linear_acceleration))
 #     print("Gravity (m/s^2): {}".format(example_imu.sensor.gravity))
 #     print()
 #
-#     time.sleep(1)
+    time.sleep(1)
 
