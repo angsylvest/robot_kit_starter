@@ -9,6 +9,9 @@ import ultrasonic
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Float32, String
 
+import RPi.GPIO as gpio
+import time
+
 class DemoRobot:
     def __init__(self):
 
@@ -90,6 +93,32 @@ class DemoRobot:
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
         while (True): # must change condition so that it will complete maze course or just end after certain amount of time
+
+            print('beginning loop')
+            # ultrasonic sensor stuff
+            gpio.output(ultrasonic.trig, False)
+            time.sleep(0.1)
+            gpio.output(ultrasonic.trig, True)
+            time.sleep(0.00001)
+            gpio.output(ultrasonic.trig, False)
+            while gpio.input(ultrasonic.echo) == 0:
+                pulse_start = time.time()
+            while gpio.input(ultrasonic.echo) == 1:
+                pulse_end = time.time()
+            pulse_duration = pulse_end - pulse_start
+            distance = pulse_duration * 17000
+            if pulse_duration >= 0.01746:
+                # print('time out')
+                continue
+            elif distance > 300 or distance == 0:
+                # print('out of range')
+                continue
+            distance = round(distance, 3)
+            # print ('Distance : %f cm'%distance)
+
+            ultrasonic.dist_sendor(distance) # will send data to
+            # ultrasonic.r.sleep()
+
             while (self.isAvoiding):
                 print('initating avoidance behavior')
                 while (self.theta > -1.5708):
