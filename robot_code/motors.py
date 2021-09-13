@@ -26,7 +26,7 @@ class MotorDriver():
         self.status = ''
 
         # sets up ros node to send status messages
-        rospy.init_node('motors', anonymous=True)
+        # rospy.init_node('motors', anonymous=True)
         self.motor_publisher = rospy.Publisher('/motor_status', Float32, queue_size=1)
 
     def MotorRun(self, motor, index, speed):
