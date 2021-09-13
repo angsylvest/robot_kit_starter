@@ -68,24 +68,24 @@ class DemoRobot:
 
     ## Make abilities more easy to comprehend (more straightforward)
     def moveRight(self):
-        motors.right()
+        self.motors.right()
         # Publishing our vel_msg for RVis
         self.motors.motor_publisher.publish('right')
 
     def moveLeft(self):
-        motors.left()
+        self.motors.left()
         self.motors.motor_publisher.publish('left')
 
     def moveBackwards(self):
-        motors.backward()
+        self.motors.backward()
         self.motors.motor_publisher.publish('backward')
 
     def moveForwards(self):
-        motors.forward(2)
+        self.motors.forward(2)
         self.motors.motor_publisher.publish('forward')
 
     def stop(self):
-        motors.stop()
+        self.motors.stop()
         self.motors.motor_publisher.publish('stop')
 
     def shutdown(self):
