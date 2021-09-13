@@ -120,10 +120,10 @@ class DemoRobot:
             distance = round(distance, 3)
             # print ('Distance : %f cm'%distance)
 
-            self.ultrasonic.dist_sendor(distance) # will send data to
+            self.ultrasonic.dist_sendor(str(distance)) # will send data to
 
             r, p, y = self.imu.sensor.euler
-            self.imu.orientation_sendor(y)
+            self.imu.orientation_sendor(str(y))
             # ultrasonic.r.sleep()
 
             while (self.isAvoiding):
