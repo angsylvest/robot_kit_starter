@@ -22,7 +22,7 @@ class IMU:
         last_val = result
         return result
 
-example_imu = IMU()
+# example_imu = IMU()
 
 # script to run to test
 # while True:

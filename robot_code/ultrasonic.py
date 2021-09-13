@@ -32,39 +32,39 @@ class sonar:
         self.distance_publisher.publish(data)
 
 
-s=sonar()
-print(s.trig)
-time.sleep(0.5)
-
-# sample script
-print ('-----------------------------------------------------------------sonar')
-try :
-    while True :
-        gpio.output(s.trig, False)
-        time.sleep(0.1)
-        gpio.output(s.trig, True)
-        time.sleep(0.00001)
-        gpio.output(s.trig, False)
-        while gpio.input(s.echo) == 0 :
-            pulse_start = time.time()
-        while gpio.input(s.echo) == 1 :
-            pulse_end = time.time()
-        pulse_duration = pulse_end - pulse_start
-        distance = pulse_duration * 17000
-        if pulse_duration >= 0.01746:
-            # print('time out')
-            continue
-        elif distance > 300 or distance == 0:
-        # print('out of range')
-            continue
-        distance = round(distance, 3)
-        # print ('Distance : %f cm'%distance)
-
-
-        s.dist_sendor(distance)
-        s.r.sleep()
-
-except (KeyboardInterrupt, SystemExit):
-    # gpio.cleanup()
-    sys.exit(0)
-
+# s=sonar()
+# print(s.trig)
+# time.sleep(0.5)
+#
+# # sample script
+# print ('-----------------------------------------------------------------sonar')
+# try :
+#     while True :
+#         gpio.output(s.trig, False)
+#         time.sleep(0.1)
+#         gpio.output(s.trig, True)
+#         time.sleep(0.00001)
+#         gpio.output(s.trig, False)
+#         while gpio.input(s.echo) == 0 :
+#             pulse_start = time.time()
+#         while gpio.input(s.echo) == 1 :
+#             pulse_end = time.time()
+#         pulse_duration = pulse_end - pulse_start
+#         distance = pulse_duration * 17000
+#         if pulse_duration >= 0.01746:
+#             # print('time out')
+#             continue
+#         elif distance > 300 or distance == 0:
+#         # print('out of range')
+#             continue
+#         distance = round(distance, 3)
+#         # print ('Distance : %f cm'%distance)
+#
+#
+#         s.dist_sendor(distance)
+#         s.r.sleep()
+#
+# except (KeyboardInterrupt, SystemExit):
+#     # gpio.cleanup()
+#     sys.exit(0)
+#
