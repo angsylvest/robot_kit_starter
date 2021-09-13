@@ -4,6 +4,7 @@ import rospy
 import motors
 import imu
 import ultrasonic
+import numpy as np
 
 # from geometry_msgs.msg import Vector3
 from std_msgs.msg import Float32, String
@@ -54,10 +55,10 @@ class DemoRobot:
     # will update orientation when encountering an obstacle (will then navigate by turning 90 degrees right or left
 
     def update_orientation(self, data):
-        self.theta = float(data)
+        self.theta = np.float32(data.item()) # convert to native float
 
     def sonar_info(self, data):
-        self.distance = data
+        self.distance = np.float32(data.item())
         if (self.distance >= 4.0):
             self.isAvoiding = True
         else:
@@ -127,13 +128,13 @@ class DemoRobot:
 
             while (self.isAvoiding):
                 print('initating avoidance behavior')
-                while (float(self.theta) > -1.5708):
+                while (self.theta > -1.5708):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveRight()  # slight movement backward along the obstacle
                     # Angular velocity in the z-axis.
                     self.rate.sleep()
 
-                while (float(self.theta) < 3.14):
+                while (self.theta < 3.14):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveLeft()  # slight movement backward along the obstacle
                     # Angular velocity in the z-axis.
