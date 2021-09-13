@@ -95,7 +95,7 @@ class DemoRobot:
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
         timestep = 20
-        while (timestep < 0): # must change condition so that it will complete maze course or just end after certain amount of time
+        while (True): # must change condition so that it will complete maze course or just end after certain amount of time
 
             print('beginning loop')
             # ultrasonic sensor stuff
