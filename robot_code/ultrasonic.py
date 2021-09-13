@@ -4,7 +4,7 @@ import time
 import sys
 import signal
 import rospy
-from std_msgs.msg import Float32
+from std_msgs.msg import Float32, String
 
 
 def signal_handler(signal, frame): # ctrl + c -> exit program
