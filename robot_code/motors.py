@@ -96,7 +96,7 @@ class MotorDriver():
 # sample script
 # print("this is a motor driver test code")
 Motor = MotorDriver()
-Motor.right(100)
+Motor.stop()
 #
 # print("forward 2 s")
 # Motor.MotorRun(0, 'forward', 100)
