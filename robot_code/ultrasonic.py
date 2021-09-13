@@ -4,7 +4,7 @@ import time
 import sys
 import signal
 import rospy
-from std_msgs.msg import Float32, String
+from std_msgs.msg import String
 
 
 def signal_handler(signal, frame): # ctrl + c -> exit program
@@ -27,9 +27,7 @@ class sonar:
         # self.r = rospy.Rate(15)
 
     def dist_sendor(self, dist):
-        data = Float32()
-        data.data = dist
-        self.distance_publisher.publish(data)
+        self.distance_publisher.publish(dist)
 
 
 # s=sonar()

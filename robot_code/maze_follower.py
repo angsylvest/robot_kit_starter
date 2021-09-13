@@ -7,7 +7,7 @@ import ultrasonic
 import numpy as np
 
 # from geometry_msgs.msg import Vector3
-from std_msgs.msg import Float32, String
+from std_msgs.msg import String
 
 import RPi.GPIO as gpio
 import time
