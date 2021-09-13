@@ -122,13 +122,13 @@ class DemoRobot:
 
             while (self.isAvoiding):
                 print('initating avoidance behavior')
-                while (self.theta > -1.5708):
+                while (float(self.theta) > -1.5708):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveRight()  # slight movement backward along the obstacle
                     # Angular velocity in the z-axis.
                     self.rate.sleep()
 
-                while (self.theta < 3.14):
+                while (float(self.theta) < 3.14):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveLeft()  # slight movement backward along the obstacle
                     # Angular velocity in the z-axis.
