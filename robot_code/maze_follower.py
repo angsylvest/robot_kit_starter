@@ -45,8 +45,8 @@ class DemoRobot:
         rospy.init_node('simulation', anonymous=False)
 
         # current pose of robot
-        self.orientation_subscriber = rospy.Subscriber('/imu_orientation', Float32, self.update_orientation) # will only store orientation info
-        self.ultrasonic_subscriber = rospy.Subscriber('/sonar_dist', Float32, self.sonar_info)
+        self.orientation_subscriber = rospy.Subscriber('/imu_orientation', String, self.update_orientation) # will only store orientation info
+        self.ultrasonic_subscriber = rospy.Subscriber('/sonar_dist', String, self.sonar_info)
         self.motor_subscriber = rospy.Subscriber('/motor_status', String, self.motor_status)
 
         self.rate = rospy.Rate(10)
@@ -55,11 +55,10 @@ class DemoRobot:
     # will update orientation when encountering an obstacle (will then navigate by turning 90 degrees right or left
 
     def update_orientation(self, data):
-        print('type -------------------', type(data))
-        self.theta = np.float(data) # convert to native float
+        self.theta = float(data) # convert to native float
 
     def sonar_info(self, data):
-        self.distance = np.float(data)
+        self.distance = float(data)
         if (self.distance >= 4.0):
             self.isAvoiding = True
         else:
