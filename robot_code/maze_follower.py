@@ -97,14 +97,14 @@ class DemoRobot:
 
             print('beginning loop')
             # ultrasonic sensor stuff
-            gpio.output(ultrasonic.trig, False)
+            gpio.output(self.ultrasonic.trig, False)
             time.sleep(0.1)
-            gpio.output(ultrasonic.trig, True)
+            gpio.output(self.ultrasonic.trig, True)
             time.sleep(0.00001)
-            gpio.output(ultrasonic.trig, False)
-            while gpio.input(ultrasonic.echo) == 0:
+            gpio.output(self.ultrasonic.trig, False)
+            while gpio.input(self.ultrasonic.echo) == 0:
                 pulse_start = time.time()
-            while gpio.input(ultrasonic.echo) == 1:
+            while gpio.input(self.ultrasonic.echo) == 1:
                 pulse_end = time.time()
             pulse_duration = pulse_end - pulse_start
             distance = pulse_duration * 17000
