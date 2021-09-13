@@ -121,7 +121,7 @@ class DemoRobot:
 
             self.ultrasonic.dist_sendor(distance) # will send data to
 
-            r, p, y = imu.sensor.euler
+            r, p, y = self.imu.sensor.euler
             self.imu.orientation_sendor(y)
             # ultrasonic.r.sleep()
 
