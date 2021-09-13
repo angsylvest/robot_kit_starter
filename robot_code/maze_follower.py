@@ -15,6 +15,7 @@ import sys
 import signal
 
 def signal_handler(signal, frame):  # ctrl + c -> exit program
+    demo_robot.stop()
     print('You pressed Ctrl+C!')
     sys.exit(0)
 
