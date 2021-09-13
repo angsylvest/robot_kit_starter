@@ -38,8 +38,8 @@ class DemoRobot:
         # self.imu_publisher = rospy.Publisher('/imu_orientation', Float32, queue_size=1)
 
         # rospy.init_node('sonar', anonymous=True)
-        self.distance_publisher = rospy.Publisher('/sonar_dist', Float32, queue_size=1)
-        self.r = rospy.Rate(15)
+        # self.distance_publisher = rospy.Publisher('/sonar_dist', Float32, queue_size=1)
+        # self.r = rospy.Rate(15)
 
         # current pose of robot
         # self.orientation_subscriber = rospy.Subscriber('/imu_orientation', Vector3, self.update_orientation) # will only store orientation info
