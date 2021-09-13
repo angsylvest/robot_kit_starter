@@ -55,10 +55,10 @@ class DemoRobot:
     # will update orientation when encountering an obstacle (will then navigate by turning 90 degrees right or left
 
     def update_orientation(self, data):
-        self.theta = np.float32(data).item() # convert to native float
+        self.theta = np.float(data) # convert to native float
 
     def sonar_info(self, data):
-        self.distance = np.float32(data).item()
+        self.distance = np.float(data)
         if (self.distance >= 4.0):
             self.isAvoiding = True
         else:
