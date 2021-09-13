@@ -26,7 +26,7 @@ class MotorDriver():
         self.status = ''
 
         # sets up ros node to send status messages
-        rospy.init_node('motors', anonymous=True)
+        # rospy.init_node('motors', anonymous=True)
         self.motor_publisher = rospy.Publisher('/motor_status', String, queue_size=1)
 
     def MotorRun(self, motor, index, speed):
@@ -95,8 +95,7 @@ class MotorDriver():
 
 # sample script
 # print("this is a motor driver test code")
-Motor = MotorDriver()
-Motor.stop()
+
 #
 # print("forward 2 s")
 # Motor.MotorRun(0, 'forward', 100)
