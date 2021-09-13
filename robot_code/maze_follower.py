@@ -6,7 +6,7 @@ import motors
 import imu
 import ultrasonic
 
-from geometry_msgs.msg import Vector3
+# from geometry_msgs.msg import Vector3
 from std_msgs.msg import Float32, String
 
 import RPi.GPIO as gpio
