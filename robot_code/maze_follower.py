@@ -55,6 +55,8 @@ class DemoRobot:
     # will update orientation when encountering an obstacle (will then navigate by turning 90 degrees right or left
 
     def update_orientation(self, data):
+        print(data, '-----------------------')
+        print(type(data))
         self.theta = float(data) # convert to native float
 
     def sonar_info(self, data):
