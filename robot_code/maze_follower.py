@@ -117,7 +117,7 @@ class DemoRobot:
             distance = round(distance, 3)
             # print ('Distance : %f cm'%distance)
 
-            ultrasonic.dist_sendor(distance) # will send data to
+            self.ultrasonic.dist_sendor(distance) # will send data to
             # ultrasonic.r.sleep()
 
             while (self.isAvoiding):
