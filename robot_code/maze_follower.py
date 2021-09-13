@@ -81,7 +81,7 @@ class DemoRobot:
         self.motors.motor_publisher.publish('backward')
 
     def moveForwards(self):
-        motors.forward()
+        motors.forward(2)
         self.motors.motor_publisher.publish('forward')
 
     def stop(self):
