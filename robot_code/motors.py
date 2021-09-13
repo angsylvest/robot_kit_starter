@@ -5,7 +5,7 @@
 from PCA9685 import PCA9685
 import time
 import rospy
-from std_msgs.msg import Float32, String
+from std_msgs.msg import String
 
 class MotorDriver():
     def __init__(self):
@@ -62,8 +62,6 @@ class MotorDriver():
             self.pwm.setDutycycle(self.PWMB, 0)
 
     def motor_sendor(self, data):
-        # data = Float32()
-        # data.data = dist
         self.motor_publisher.publish(data)
 
     def forward(self,  duration):

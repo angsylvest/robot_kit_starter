@@ -4,14 +4,14 @@ import time
 import rospy
 import board
 import adafruit_bno055
-from std_msgs.msg import Float32, String
+from std_msgs.msg import String
 
 # imu part of robot
 class IMU:
     def __init__(self):
         self.i2c = board.I2C()
         self.sensor = adafruit_bno055.BNO055_I2C(self.i2c)
-        self.imu_publisher = rospy.Publisher('/imu_orientation', Float32, queue_size=1)
+        self.imu_publisher = rospy.Publisher('/imu_orientation', String, queue_size=1)
         self.last_val = 0xFFFF
 
     def temperature(self):
@@ -25,9 +25,7 @@ class IMU:
         return result
 
     def orientation_sendor(self, dist):
-        data = Float32()
-        data.data = dist
-        self.imu_publisher.publish(data)
+        self.imu_publisher.publish(dist)
 
 # example_imu = IMU()
 
