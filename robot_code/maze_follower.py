@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 from math import sqrt, atan2
 import rospy
-
 import motors
 import imu
 import ultrasonic
@@ -43,15 +42,8 @@ class DemoRobot:
         # init node
         rospy.init_node('simulation', anonymous=False)
 
-        # rospy.init_node('imu', anonymous=True)
-        # self.imu_publisher = rospy.Publisher('/imu_orientation', Float32, queue_size=1)
-
-        # rospy.init_node('sonar', anonymous=True)
-        # self.distance_publisher = rospy.Publisher('/sonar_dist', Float32, queue_size=1)
-        # self.r = rospy.Rate(15)
-
         # current pose of robot
-        # self.orientation_subscriber = rospy.Subscriber('/imu_orientation', Vector3, self.update_orientation) # will only store orientation info
+        self.orientation_subscriber = rospy.Subscriber('/imu_orientation', Float32, self.update_orientation) # will only store orientation info
         self.ultrasonic_subscriber = rospy.Subscriber('/sonar_dist', Float32, self.sonar_info)
         self.motor_subscriber = rospy.Subscriber('/motor_status', String, self.motor_status)
 
@@ -60,9 +52,8 @@ class DemoRobot:
     # status updates will change the status of the robot over maze follower sequence
     # will update orientation when encountering an obstacle (will then navigate by turning 90 degrees right or left
 
-    # def update_orientation(self, data):
-    #     (roll, pitch, yaw) = data.pose.pose.orientation
-    #     self.theta = yaw
+    def update_orientation(self, data):
+        self.theta = data
 
     def sonar_info(self, data):
         self.distance = data
@@ -102,7 +93,8 @@ class DemoRobot:
 
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
-        while (True): # must change condition so that it will complete maze course or just end after certain amount of time
+        timestep = 20
+        while (timestep < 0): # must change condition so that it will complete maze course or just end after certain amount of time
 
             print('beginning loop')
             # ultrasonic sensor stuff
@@ -127,6 +119,9 @@ class DemoRobot:
             # print ('Distance : %f cm'%distance)
 
             self.ultrasonic.dist_sendor(distance) # will send data to
+
+            r, p, y = imu.sensor.euler
+            self.imu.orientation_sendor(y)
             # ultrasonic.r.sleep()
 
             while (self.isAvoiding):
@@ -145,10 +140,11 @@ class DemoRobot:
 
             self.moveForwards()
             print('moving forward')
+            timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
             self.rate.sleep()
 
-        # self.stop()
-        # print('stopping -- reached end of maze')
+        self.stop()
+        print('stopping -- reached end of maze')
 
 ## potentially use different bug algorithms to demo to students
 
