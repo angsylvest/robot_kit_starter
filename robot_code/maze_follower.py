@@ -70,16 +70,16 @@ class DemoRobot:
 
     ## Make abilities more easy to comprehend (more straightforward)
     def moveRight(self):
-        self.motors.right()
+        self.motors.right(2)
         # Publishing our vel_msg for RVis
         self.motors.motor_publisher.publish('right')
 
     def moveLeft(self):
-        self.motors.left()
+        self.motors.left(2)
         self.motors.motor_publisher.publish('left')
 
     def moveBackwards(self):
-        self.motors.backward()
+        self.motors.backward(2)
         self.motors.motor_publisher.publish('backward')
 
     def moveForwards(self):
