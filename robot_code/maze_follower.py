@@ -27,9 +27,9 @@ class DemoRobot:
         self.status = 'forward'
 
         # defines robot parts
-        self.motors = motors.MotorDriver
-        self.imu = imu.IMU
-        self.ultrasonic = ultrasonic.sonar
+        self.motors = motors.MotorDriver()
+        self.imu = imu.IMU()
+        self.ultrasonic = ultrasonic.sonar()
 
         # init node
         rospy.init_node('simulation', anonymous=False)
