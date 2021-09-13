@@ -36,7 +36,8 @@ while True:
 #     print("Accelerometer (m/s^2): {}".format(example_imu.sensor.acceleration))
 #     print("Magnetometer (microteslas): {}".format(example_imu.sensor.magnetic))
 #     print("Gyroscope (rad/sec): {}".format(example_imu.sensor.gyro))
-    print("Euler angle: {}".format(example_imu.sensor.euler))
+    roll, pitch, yaw = example_imu.sensor.euler
+    print("Euler angle: {}".format(yaw))
 #     print("Quaternion: {}".format(example_imu.sensor.quaternion))
 #     print("Linear acceleration (m/s^2): {}".format(example_imu.sensor.linear_acceleration))
 #     print("Gravity (m/s^2): {}".format(example_imu.sensor.gravity))
