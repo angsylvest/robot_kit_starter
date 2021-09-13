@@ -15,6 +15,7 @@ import sys
 import signal
 
 def signal_handler(signal, frame):  # ctrl + c -> exit program
+    demo_robot.stop()
     print('You pressed Ctrl+C!')
     sys.exit(0)
 
@@ -94,7 +95,7 @@ class DemoRobot:
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
         timestep = 20
-        while (timestep < 0): # must change condition so that it will complete maze course or just end after certain amount of time
+        while (True): # must change condition so that it will complete maze course or just end after certain amount of time
 
             print('beginning loop')
             # ultrasonic sensor stuff
