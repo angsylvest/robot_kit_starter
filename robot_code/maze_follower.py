@@ -95,7 +95,7 @@ class DemoRobot:
 
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
-        timestep = 20
+        # timestep = 20
         while (True): # must change condition so that it will complete maze course or just end after certain amount of time
 
             print('beginning loop')
@@ -131,18 +131,22 @@ class DemoRobot:
                 while (self.theta > -1.5708):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveRight()  # slight movement backward along the obstacle
+                    r, p, y = self.imu.sensor.euler
+                    self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
                     self.rate.sleep()
 
                 while (self.theta < 3.14):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveLeft()  # slight movement backward along the obstacle
+                    r, p, y = self.imu.sensor.euler
+                    self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
                     self.rate.sleep()
 
             self.moveForwards()
             print('moving forward')
-            timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
+            # timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
             self.rate.sleep()
 
         self.stop()
