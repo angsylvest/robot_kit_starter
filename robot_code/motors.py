@@ -64,28 +64,28 @@ class MotorDriver():
     def motor_sendor(self, data):
         self.motor_publisher.publish(data)
 
-    def forward(self,  duration):
-        self.MotorRun(0, 'forward', 100)
-        self.MotorRun(1, 'forward', 100)
+    def forward(self,  duration, power = 100):
+        self.MotorRun(0, 'forward', power)
+        self.MotorRun(1, 'forward', power)
         self.motor_sendor('forward')
         time.sleep(duration)
 
-    def backward(self, duration):
-        self.MotorRun(0, 'backward', 100)
-        self.MotorRun(1, 'backward', 100)
+    def backward(self, duration, power = 100):
+        self.MotorRun(0, 'backward', power)
+        self.MotorRun(1, 'backward', power)
         self.motor_sendor('backward')
         time.sleep(duration)
 
     # need to troubleshoot to make sure correct motor is being moved
-    def right(self, duration):
-        self.MotorRun(0, 'forward', 100)
-        self.MotorRun(1, 'backward', 100)
+    def right(self, duration, power = 100):
+        self.MotorRun(0, 'forward', power)
+        self.MotorRun(1, 'backward', power)
         self.motor_sendor('right')
         time.sleep(duration)
 
-    def left(self, duration):
-        self.MotorRun(0, 'backward', 100)
-        self.MotorRun(1, 'forward', 100)
+    def left(self, duration, power = 100):
+        self.MotorRun(0, 'backward', power)
+        self.MotorRun(1, 'forward', power)
         self.motor_sendor('left')
         time.sleep(duration)
 
