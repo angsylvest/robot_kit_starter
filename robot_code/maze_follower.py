@@ -94,34 +94,37 @@ class DemoRobot:
     def shutdown(self):
         print('successfully reached goal .. shutting down')
 
+    def sonar_behavior(self):
+        # ultrasonic sensor stuff
+        gpio.output(self.ultrasonic.trig, False)
+        time.sleep(0.1)
+        gpio.output(self.ultrasonic.trig, True)
+        time.sleep(0.00001)
+        gpio.output(self.ultrasonic.trig, False)
+        while gpio.input(self.ultrasonic.echo) == 0:
+            pulse_start = time.time()
+        while gpio.input(self.ultrasonic.echo) == 1:
+            pulse_end = time.time()
+        pulse_duration = pulse_end - pulse_start
+        distance = pulse_duration * 17000
+        # if pulse_duration >= 0.01746:
+        #     # print('time out')
+        #     continue
+        # elif distance > 300 or distance == 0:
+        #     # print('out of range')
+        #     continue
+        self.distance = round(distance, 3)
+
     ## Example tasks that we would make robot do
     def initiateMazeBehavior(self):
         # timestep = 20
         while (True): # must change condition so that it will complete maze course or just end after certain amount of time
 
             print('beginning loop')
-            # ultrasonic sensor stuff
-            gpio.output(self.ultrasonic.trig, False)
-            time.sleep(0.1)
-            gpio.output(self.ultrasonic.trig, True)
-            time.sleep(0.00001)
-            gpio.output(self.ultrasonic.trig, False)
-            while gpio.input(self.ultrasonic.echo) == 0:
-                pulse_start = time.time()
-            while gpio.input(self.ultrasonic.echo) == 1:
-                pulse_end = time.time()
-            pulse_duration = pulse_end - pulse_start
-            distance = pulse_duration * 17000
-            if pulse_duration >= 0.01746:
-                # print('time out')
-                continue
-            elif distance > 300 or distance == 0:
-                # print('out of range')
-                continue
-            distance = round(distance, 3)
+            self.sonar_behavior()
             # print ('Distance : %f cm'%distance)
 
-            self.ultrasonic.dist_sendor(str(distance)) # will send data to
+            self.ultrasonic.dist_sendor(str(self.distance)) # will send data to
 
             r, p, y = self.imu.sensor.euler
             self.imu.orientation_sendor(str(y))
@@ -135,6 +138,10 @@ class DemoRobot:
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
+                    self.sonar_behavior()
+                    # print ('Distance : %f cm'%distance)
+
+                    self.ultrasonic.dist_sendor(str(self.distance))
                     print('moving backwards and right') 
                     self.rate.sleep()
 
@@ -143,17 +150,25 @@ class DemoRobot:
                     self.moveLeft()  # slight movement backward along the obstacle
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
+                    self.sonar_behavior()
+                    # print ('Distance : %f cm'%distance)
+
+                    self.ultrasonic.dist_sendor(str(self.distance))
                     # Angular velocity in the z-axis.
                     print('moving backwards and left') 
                     self.rate.sleep()
 
             self.moveForwards()
+            self.sonar_behavior()
+            # print ('Distance : %f cm'%distance)
+
+            self.ultrasonic.dist_sendor(str(self.distance))
             print('moving forward')
             # timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
             self.rate.sleep()
 
-        self.stop()
-        print('stopping -- reached end of maze')
+        # self.stop()
+        # print('stopping -- reached end of maze')
 
 ## potentially use different bug algorithms to demo to students
 
