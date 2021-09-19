@@ -59,10 +59,11 @@ class DemoRobot:
 
     def sonar_info(self, data):
         self.distance = float(data.data)
-        if (self.distance >= 4.0):
+        if (self.distance >= 0.5):
             self.isAvoiding = True
         else:
             self.isAvoiding = False
+            print('no longer avoiding') 
 
 
     def motor_status(self, data):
@@ -79,11 +80,11 @@ class DemoRobot:
         self.motors.motor_publisher.publish('left')
 
     def moveBackwards(self):
-        self.motors.backward(2)
+        self.motors.backward(0.25)
         self.motors.motor_publisher.publish('backward')
 
     def moveForwards(self):
-        self.motors.forward(2)
+        self.motors.forward(0.25)
         self.motors.motor_publisher.publish('forward')
 
     def stop(self):
@@ -134,6 +135,7 @@ class DemoRobot:
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
+                    print('moving backwards and right') 
                     self.rate.sleep()
 
                 while (self.theta < 3.14):
@@ -142,6 +144,7 @@ class DemoRobot:
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
+                    print('moving backwards and left') 
                     self.rate.sleep()
 
             self.moveForwards()
