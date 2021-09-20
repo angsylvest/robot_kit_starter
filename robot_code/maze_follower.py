@@ -132,27 +132,23 @@ class DemoRobot:
 
             while (self.isAvoiding):
                 print('initating avoidance behavior')
-                while (self.theta > -1.5708):
+                while (self.theta > -1.5708 and self.isAvoiding):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveRight()  # slight movement backward along the obstacle
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
                     # Angular velocity in the z-axis.
                     self.sonar_behavior()
-                    # print ('Distance : %f cm'%distance)
-
                     self.ultrasonic.dist_sendor(str(self.distance))
                     print('moving backwards and right') 
                     self.rate.sleep()
 
-                while (self.theta < 3.14):
+                while (self.theta < 3.14 and self.isAvoiding):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveLeft()  # slight movement backward along the obstacle
                     r, p, y = self.imu.sensor.euler
                     self.imu.orientation_sendor(str(y))
                     self.sonar_behavior()
-                    # print ('Distance : %f cm'%distance)
-
                     self.ultrasonic.dist_sendor(str(self.distance))
                     # Angular velocity in the z-axis.
                     print('moving backwards and left') 
@@ -160,9 +156,8 @@ class DemoRobot:
 
             self.moveForwards()
             self.sonar_behavior()
-            # print ('Distance : %f cm'%distance)
-
             self.ultrasonic.dist_sendor(str(self.distance))
+
             print('moving forward')
             # timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
             self.rate.sleep()
