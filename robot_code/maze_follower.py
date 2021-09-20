@@ -60,7 +60,7 @@ class DemoRobot:
     def sonar_info(self, data):
         self.distance = float(data.data)
         print('distance ----------------', self.distance)
-        if (self.distance >= 0.5):
+        if (self.distance >= 50):
             self.isAvoiding = True
             print('is avoiding')
         else:
