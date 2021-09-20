@@ -61,6 +61,7 @@ class DemoRobot:
         self.distance = float(data.data)
         if (self.distance >= 0.5):
             self.isAvoiding = True
+            print('is avoiding')
         else:
             self.isAvoiding = False
             print('no longer avoiding') 
