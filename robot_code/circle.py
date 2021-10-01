@@ -22,10 +22,12 @@ def signal_handler(signal, frame):  # ctrl + c -> exit program
     sys.exit(0)
 
 def circle():
+    motors.forward(10)
     motors.right(100)
 
 def sinosoid():
     for i in range(4):
+        motors.forward(10)
         motors.right(10)
         motors.left(10)
 
