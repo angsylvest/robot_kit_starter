@@ -60,7 +60,7 @@ class DemoRobot:
     def sonar_info(self, data):
         self.distance = float(data.data)
         print('distance ----------------', self.distance)
-        if (self.distance <= 50):
+        if (self.distance <= 35):
             self.isAvoiding = True
             print('is avoiding')
         else:
@@ -73,12 +73,12 @@ class DemoRobot:
 
     ## Make abilities more easy to comprehend (more straightforward)
     def moveRight(self):
-        self.motors.right(2, power = 50)
+        self.motors.right(0.25, power = 25)
         # Publishing our vel_msg for RVis
         self.motors.motor_publisher.publish('right')
 
     def moveLeft(self):
-        self.motors.left(2, power = 50)
+        self.motors.left(0.25, power = 25)
         self.motors.motor_publisher.publish('left')
 
     def moveBackwards(self):
@@ -145,7 +145,7 @@ class DemoRobot:
                     print('moving backwards and right') 
                     self.rate.sleep()
 
-                while (self.theta < 3.14 and self.isAvoiding):
+                while (self.theta < 1.5708 and self.isAvoiding):
                     self.moveBackwards()  # intended to rotate robot away from obstacle
                     self.moveLeft()  # slight movement backward along the obstacle
                     r, p, y = self.imu.sensor.euler
