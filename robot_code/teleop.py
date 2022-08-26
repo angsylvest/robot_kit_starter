@@ -5,6 +5,7 @@ import motors
 import imu
 import ultrasonic
 import numpy as np
+import keyboard
 
 # from geometry_msgs.msg import Vector3
 from std_msgs.msg import String
@@ -65,7 +66,7 @@ class DemoRobot:
             print('is avoiding')
         else:
             self.isAvoiding = False
-            print('no longer avoiding') 
+            print('no longer avoiding')
 
 
     def motor_status(self, data):
@@ -118,7 +119,7 @@ class DemoRobot:
         self.distance = round(distance, 3)
 
     ## Example tasks that we would make robot do
-    def initiateMazeBehavior(self):
+    def initiateTeleopBehavior(self):
         # timestep = 20
         while (True): # must change condition so that it will complete maze course or just end after certain amount of time
 
@@ -127,41 +128,18 @@ class DemoRobot:
             # print ('Distance : %f cm'%distance)
 
             self.ultrasonic.dist_sendor(str(self.distance)) # will send data to
-
             r, p, y = self.imu.sensor.euler
             self.imu.orientation_sendor(str(y))
-            # ultrasonic.r.sleep()
 
-            while (self.isAvoiding):
-                print('initating avoidance behavior')
-                while (self.theta > -1.5708 and self.isAvoiding):
-                    self.moveBackwards()  # intended to rotate robot away from obstacle
-                    self.moveRight()  # slight movement backward along the obstacle
-                    r, p, y = self.imu.sensor.euler
-                    self.imu.orientation_sendor(str(y))
-                    # Angular velocity in the z-axis.
-                    self.sonar_behavior()
-                    self.ultrasonic.dist_sendor(str(self.distance))
-                    print('moving backwards and right') 
-                    self.rate.sleep()
+            if keyboard.read_key() == 'w':
+                self.moveForwards()
+            if keyboard.read_key() == 'a':
+                self.moveLeft()
+            if keyboard.read_key() == 's':
+                self.moveBackwards()
+            if keyboard.read_key() == 'd':
+                self.moveRight()
 
-                while (self.theta < 1.5708 and self.isAvoiding):
-                    self.moveBackwards()  # intended to rotate robot away from obstacle
-                    self.moveLeft()  # slight movement backward along the obstacle
-                    r, p, y = self.imu.sensor.euler
-                    self.imu.orientation_sendor(str(y))
-                    self.sonar_behavior()
-                    self.ultrasonic.dist_sendor(str(self.distance))
-                    # Angular velocity in the z-axis.
-                    print('moving backwards and left') 
-                    self.rate.sleep()
-
-            self.moveForwards()
-            self.sonar_behavior()
-            self.ultrasonic.dist_sendor(str(self.distance))
-
-            print('moving forward')
-            # timestep = timestep + 1 # a way to ensure that robot isn't moving forward indefinitely
             self.rate.sleep()
 
         # self.stop()
@@ -173,7 +151,7 @@ if __name__ == '__main__':
     ## Put your functions here to start
     demo_robot = DemoRobot()
     while not rospy.is_shutdown():
-        demo_robot.initiateMazeBehavior()
+        demo_robot.initiateTeleopBehavior()
         rospy.spin()
 
     while rospy.is_shutdown():
