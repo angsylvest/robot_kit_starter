@@ -1,8 +1,7 @@
-#! /usr/bin/python3
+import adafruit_bno055
 # import statements
 import time
 import board
-import adafruit_bno055
 
 # imu part of robot
 class IMU:

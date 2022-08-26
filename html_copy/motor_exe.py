@@ -4,8 +4,8 @@
 # will have to update so that import goes to correct place
 from PCA9685 import PCA9685
 import time
-import rospy
-from std_msgs.msg import Float32
+# import rospy
+# from std_msgs.msg import Float32
 
 class MotorDriver():
     def __init__(self):
@@ -26,8 +26,8 @@ class MotorDriver():
         self.status = ''
 
         # sets up ros node to send status messages
-        rospy.init_node('motors', anonymous=True)
-        self.motor_publisher = rospy.Publisher('/motor_status', Float32, queue_size=1)
+        # rospy.init_node('motors', anonymous=True)
+        # self.motor_publisher = rospy.Publisher('/motor_status', Float32, queue_size=1)
 
     def MotorRun(self, motor, index, speed):
         if speed > 100:
@@ -64,31 +64,32 @@ class MotorDriver():
     def motor_sendor(self, data):
         # data = Float32()
         # data.data = dist
-        self.motor_publisher.publish(data)
+        # self.motor_publisher.publish(data)
+        pass 
 
     def forward(self,  duration):
         self.MotorRun(0, 'forward', 100)
         self.MotorRun(1, 'forward', 100)
-        self.motor_sendor('forward')
+        # self.motor_sendor('forward')
         time.sleep(duration)
 
     def backward(self, duration):
         self.MotorRun(0, 'backward', 100)
         self.MotorRun(1, 'backward', 100)
-        self.motor_sendor('backward')
+        # self.motor_sendor('backward')
         time.sleep(duration)
 
     # need to troubleshoot to make sure correct motor is being moved
     def right(self, duration):
         self.MotorRun(0, 'forward', 100)
         self.MotorRun(1, 'backward', 100)
-        self.motor_sendor('right')
+        # self.motor_sendor('right')
         time.sleep(duration)
 
     def left(self, duration):
         self.MotorRun(0, 'backward', 100)
         self.MotorRun(1, 'forward', 100)
-        self.motor_sendor('left')
+        # self.motor_sendor('left')
         time.sleep(duration)
 
     def stop(self):
@@ -99,7 +100,7 @@ class MotorDriver():
 # print("this is a motor driver test code")
 Motor = MotorDriver()
 #
-print("forward 2 s")
+print("forward 2 s, testing sequence")
 Motor.MotorRun(0, 'forward', 100)
 Motor.MotorRun(1, 'forward', 100)
 time.sleep(2)
@@ -112,4 +113,6 @@ time.sleep(2)
 print("stop")
 Motor.MotorStop(0)
 Motor.MotorStop(1)
+
+
 

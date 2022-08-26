@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 # import parts of robot to control & coordinate
 import motors
 import imu
